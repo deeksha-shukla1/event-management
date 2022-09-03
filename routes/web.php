@@ -23,3 +23,11 @@ Route::get('/', [EventManagementController::class, 'index'])->name('index');
 Route::post('/add-ticket', [EventManagementController::class, 'addTicket'])->name('addTicket');
 
 Route::post('/', [EventManagementController::class, 'index'])->name('index');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
