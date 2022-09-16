@@ -1,59 +1,108 @@
 @extends('.layouts.app')
 
 @section('content')
-<div class="container-fluid">
-	{{-- Content --}}
-	<div class="row">
-		<div class="col-md-10 mx-auto">
-			<form method="POST" class="form" enctype="multipart/form-data" id="publishing-form">
-			@csrf
-				<div class="row">
-					{{-- Editor Content --}}
-					<div class="col-xl-10 col-lg-9 col-md-8 col-12">
-						<div class="row">
-							<!--begin::Title-->
-							<div class="pb-13 pt-lg-0 pt-5 text-center">
-								<h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Add Event</h3>
-							</div>
-							<!--begin::Title-->
-							<!--begin::Form group-->
-							<div class="form-group col-8">
-								<label class="font-size-h6 font-weight-bolder text-dark">Event Name</label>
-								<input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="text" name="event_name" autocomplete="off" />
-							</div>
-							<div class="form-group col-8">
-								<label for="event_description">Event Description:</label>
-								<textarea class="form-control" rows="5" id="event_description"></textarea>
-							</div>
-							<div class="form-group col-8">
-								<div class="row">
-									<div class="form-group col-6">
-										<label class="font-size-h6 font-weight-bolder text-dark">Start Date</label>
-										<input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="date" name="event_description" autocomplete="off" />
-									</div>
-									<div class="form-group col-6">
-										<label class="font-size-h6 font-weight-bolder text-dark">End Date</label>
-										<input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="date" name="event_description" autocomplete="off" />
-									</div>
-								</div>
-							</div>
-							<div class="form-group col-8">
-								<label class="font-size-h6 font-weight-bolder text-dark">Organizer Name:</label>
-								<input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="text" name="organizer_name" autocomplete="off" />
-							</div>
-							<!--end::Form group-->
-							
-							<!--begin::Action-->
-							<div class="pb-lg-0 pb-5">
-								<button type="submit"  class="btn btn-primary">Save Event</button>
-							</div>
-							<!--end::Action-->
-						</div>
-					</div>
-				</div>
-			</form>
-			<!--end::Form-->
-		</div>
-	</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">{{ __('Add Content') }}</div>
+
+                <div class="card-body">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+
+                        <div class="row mb-3">
+                            <label for="event_name" class="col-md-4 col-form-label text-md-end">{{ __('Content Name:') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="event_name" type="text" class="form-control @error('event_name') is-invalid @enderror" name="event_name" value="{{ old('event_name') }}" required autocomplete="off" autofocus>
+
+                                @error('event_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="event_description" class="col-md-4 col-form-label text-md-end">{{ __('Content Description:') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="event_description" type="text" class="form-control @error('event_description') is-invalid @enderror" name="event_description" required autocomplete="off">
+
+                                @error('event_description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="start_date" class="col-md-4 col-form-label text-md-end">{{ __('Start Date:') }}</label>
+
+                            <div class="col-md-2">
+                                <input id="start_date" type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" required autocomplete="off">
+
+                                @error('start_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+							<label for="end_date" class="col-md-2 col-form-label text-md-end">{{ __('End Date:') }}</label>
+
+                            <div class="col-md-2">
+                                <input id="end_date" type="date" class="form-control @error('end_date') is-invalid @enderror" name="end_date" required autocomplete="off">
+
+                                @error('end_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        {{-- <div class="row mb-3">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                    <label class="form-check-label" for="remember">
+                                        {{ __('Remember Me') }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div> --}}
+
+                        <div class="row mb-3">
+                            <label for="organizer_name" class="col-md-4 col-form-label text-md-end">{{ __('Class Name:') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="organizer_name" type="text" class="form-control @error('organizer_name') is-invalid @enderror" name="organizer_name" required autocomplete="off">
+
+                                @error('organizer_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="button" class="btn btn-info">
+                                    {{ __('Add Content') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
